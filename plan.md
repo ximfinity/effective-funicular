@@ -203,6 +203,8 @@ Real FCPS routing is far more detailed. The goal is a **defensible estimate** th
 
 ## 9. Privacy & trust
 
+_Full legal disclaimer: [DISCLAIMER.md](DISCLAIMER.md). The app shows it on first visit, keeps an "Unofficial · Disclaimer" link in the header, adds a line to the map attribution, and stamps exported scenarios._
+
 - Only aggregate SPA-level counts. Estimated counts are rounded, and counts < 10 are hidden from tooltips.
 - Every number is tagged as Official, Derived, or Estimated, with a "Data & methods" panel that names sources and dates.
 - Clear disclaimer: unofficial, for community understanding, and not a source of truth for assignments.

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Assignment, Model, Params } from '../model/types'
+import { SHORT_DISCLAIMER } from '../lib/disclaimer'
 import { apply, deleteLocal, diff, listSaved, saveLocal, toHash, type SavedScenario } from '../lib/scenario'
 
 interface Props {
@@ -32,7 +33,7 @@ export function ScenarioBar(p: Props) {
     flash('Saved in this browser')
   }
   const exportJson = () => {
-    const blob = new Blob([JSON.stringify(current('export'), null, 1)], { type: 'application/json' })
+    const blob = new Blob([JSON.stringify({ disclaimer: `${SHORT_DISCLAIMER} Hypothetical scenario, not an official FCPS proposal or assignment.`, ...current('export') }, null, 1)], { type: 'application/json' })
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
     a.download = 'fcps-scenario.json'

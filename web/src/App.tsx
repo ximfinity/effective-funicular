@@ -7,6 +7,7 @@ import { Inspector } from './components/Inspector'
 import { OptimizerPanel } from './components/OptimizerPanel'
 import { ScenarioBar } from './components/ScenarioBar'
 import { About } from './components/About'
+import { DisclaimerGate } from './components/Disclaimer'
 import { HotSpots, type Focus } from './components/HotSpots'
 import { loadModel } from './model/load'
 import { baselineAssignment, cloneAssignment, compute } from './model/engine'
@@ -103,7 +104,8 @@ function Explorer({ model }: { model: Model }) {
       <header className="topbar">
         <div className="brand">
           <strong>FCPS Boundary Explorer</strong>
-          <span className="muted">Fairfax County Public Schools · unofficial modeling tool</span>
+          <span className="muted">Independent, unofficial modeling tool</span>
+          <DisclaimerGate />
         </div>
         <ScenarioBar
           model={model} assignment={assignment} params={params} baseKey={baseKey}

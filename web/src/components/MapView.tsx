@@ -69,7 +69,7 @@ export function MapView(props: Props) {
       style: STYLE,
       center: [-77.29, 38.84],
       zoom: 9.9,
-      attributionControl: { compact: true },
+      attributionControl: { compact: true, customAttribution: 'Unofficial model · not affiliated with FCPS or Fairfax County' },
     })
     map.current = m
     // if the basemap style cannot load, fall back to a plain background so the model layers still work

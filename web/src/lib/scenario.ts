@@ -8,6 +8,7 @@ export interface SavedScenario {
   changes: [Level, number, number][] // level, SPA id, school id
   params: Partial<Params>
   saved: string
+  disclaimer?: string
 }
 
 export function diff(m: Model, a: Assignment, base: '2025' | '2026'): [Level, number, number][] {

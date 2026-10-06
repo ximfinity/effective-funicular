@@ -23,7 +23,7 @@ a { color: var(--accent); }
 .app { display: grid; grid-template-columns: 300px 1fr 400px; grid-template-rows: 48px 1fr; height: 100vh; }
 .topbar { grid-column: 1 / 4; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 12px; background: var(--accent); color: #fff; }
 .topbar .muted { color: #c9d6e3; }
-.brand { display: flex; gap: 10px; align-items: baseline; white-space: nowrap; }
+.brand { display: flex; gap: 10px; align-items: center; white-space: nowrap; }
 .brand strong { font-size: 15px; }
 .scenariobar { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; overflow: hidden; }
 .scenariobar button { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25); }
@@ -129,6 +129,7 @@ table.schools tr:hover td { background: #f6f8fb; }
 @media (max-width: 1100px) {
   .app { grid-template-columns: 260px 1fr 340px; }
   .brand .muted, .scenariobar > .muted { display: none; }
+  .brand .disclaimer-link { display: inline-block; }
 }
 @media (max-width: 800px) {
   .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 55vh auto auto; height: auto; overflow-x: hidden; }
@@ -149,3 +150,12 @@ table.schools tr:hover td { background: #f6f8fb; }
 .hot p { margin: 4px 0; line-height: 1.4; }
 .hot .btnrow { align-items: center; }
 .focusnote { background: #eef4fb; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; }
+
+.disclaimer-link { background: var(--accent2); color: #222; border: 0; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+.modal-backdrop { white-space: normal; text-align: left; position: fixed; inset: 0; background: rgba(15, 23, 33, .55); z-index: 1000; display: grid; place-items: center; padding: 16px; }
+.modal { background: #fff; color: var(--ink); max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 20px 24px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.modal h2 { margin: 0 0 8px; font-size: 18px; }
+.modal .lead { font-weight: 600; line-height: 1.45; }
+.disclaimer-text h4 { margin: 12px 0 2px; font-size: 13px; }
+.disclaimer-text p { margin: 0; line-height: 1.5; color: #333; }
+.legal { border-top: 1px solid var(--line); margin-top: 10px; }

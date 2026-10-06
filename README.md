@@ -1,5 +1,10 @@
 # FCPS Boundary Explorer
 
+> **Unofficial and independent.** This project is not affiliated with, endorsed by, or produced in
+> collaboration with Fairfax County Public Schools, the Fairfax County School Board, Fairfax County
+> Government, or any other government entity. It does not show official school assignments. All figures
+> are model estimates provided "as is" without warranty. See [DISCLAIMER.md](DISCLAIMER.md).
+
 An interactive, unofficial modeling tool for **Fairfax County Public Schools** attendance boundaries
 (elementary, middle and high school, countywide). Use it to see why boundaries fall where they do, and to
 test changes that relieve overcrowding, cut busing and use capacity better.
@@ -54,4 +59,4 @@ python pipeline/tests/test_walk_graph.py
 
 All inputs are public: Fairfax County GIS open data, the FCPS FY 2027-31 CIP, the FCPS 2024-25 bell
 schedule, and the NCES Common Core of Data. Student counts per planning area, neighborhood demographics
-and bus routes are **estimates**. This is not an FCPS product.
+and bus routes are **estimates**. This is not an FCPS or Fairfax County product; see [DISCLAIMER.md](DISCLAIMER.md).

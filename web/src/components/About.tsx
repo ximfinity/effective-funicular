@@ -1,12 +1,17 @@
 import type { Model } from '../model/types'
 import { pct } from '../lib/format'
+import { DisclaimerText } from './Disclaimer'
 
 export function About({ model }: { model: Model }) {
   const pr = model.raw.params
   return (
     <div className="about">
       <h3>What this is</h3>
-      <p>An unofficial, independent model of Fairfax County Public Schools attendance boundaries, built only from public data. Use it to see why boundaries fall where they do, and to test changes. It is <b>not</b> an FCPS tool, and it never tells anyone which school they are assigned to. Use the <a href="https://www.fcps.edu/facilities-planning-future/school-boundary-adjustments" target="_blank" rel="noreferrer">FCPS Boundary Explorer</a> for official assignments.</p>
+      <p>An unofficial, independent model of Fairfax County Public Schools attendance boundaries, built only from public data. Use it to see why boundaries fall where they do, and to test changes. It is <b>not</b> an FCPS or Fairfax County tool, and it never tells anyone which school they are assigned to. Use the <a href="https://www.fcps.edu/facilities-planning-future/school-boundary-adjustments" target="_blank" rel="noreferrer">FCPS Boundary Explorer</a> for official assignments.</p>
+      <div className="legal">
+        <h3>Disclaimer</h3>
+        <DisclaimerText />
+      </div>
       <h3>Building blocks</h3>
       <p>Boundaries are drawn from FCPS's {model.S.toLocaleString()} <b>Student Planning Areas</b> (SPAs), the same neighborhood units FCPS and its consultant used in the 2024-26 comprehensive review. Each SPA carries its adopted 2026-27 ES/MS/HS and AAP assignments. 2025-26 assignments come from overlaying the county's prior-year attendance areas.</p>
       <h3>Students <span className="tag">estimated</span></h3>
