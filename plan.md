@@ -2,8 +2,21 @@
 
 An interactive map that lets community members see **why** school attendance boundaries sit where they do, and try out changes that reduce overcrowding, cut busing, and use school capacity better. It covers elementary, middle, and high school levels.
 
-> Status: **planning only. Nothing is built yet.** The open questions in §11 need answers before the build starts.
-> Working assumption: "FCPS" means **Fairfax County Public Schools (VA)**. If it means a different FCPS (Frederick MD, Fayette KY, Forsyth GA, …), the data sources in §3 change but the design still applies.
+> Status: **v1 built.** Decisions are in §0, data sources in §3, the as-built design in §10 and validation in §11.
+
+## 0. Decisions (from the owner, Oct 2026)
+
+| Question | Decision |
+|---|---|
+| District | Fairfax County Public Schools, VA |
+| Audience | Personal site, a modeling tool first. Analytical depth matters more than polish. |
+| Scope | **Whole county, all pyramids, ES + MS + HS** |
+| Baselines | **Both**: 2025-26 boundaries and adopted 2026-27 boundaries, with a diff between them |
+| Demographics | **Included.** Shown for every scenario and available to the optimizer as an optional weight (default 0) |
+| Special programs | **Included**: AAP Level IV center assignment, TJHSST draw, program capacity from the CIP |
+| Buses | **Route lines and served areas drawn on the map** |
+| Road barriers | Derived from public road data (class, speed limit, divided) |
+| Data / tech | No limits. Use whatever public data and technology gives the best model. |
 
 ---
 
@@ -38,6 +51,32 @@ An interactive map that lets community members see **why** school attendance bou
 ---
 
 ## 3. Data inventory
+
+### 3a. Confirmed sources (checked Oct 2026, downloaded by `pipeline/fetch.py`)
+
+| Layer | Endpoint (Fairfax County AGOL org `ioennV6PpG5Xodq0` unless noted) | Notes |
+|---|---|---|
+| **Student Planning Areas** (1,327 polygons) | `Student_Planning_Areas/0` | Each SPA carries its 2026-27 **ES, MS, HS, ES-AAP and MS-AAP assignments**. This removes the biggest risk. |
+| Attendance areas 2026-27 | `Elementary/Middle/High_School_Attendance_Areas/0` | `SCH_YR = 2026_27` |
+| Attendance areas 2025-26 | `OpenData_S1` layers 13/11/12 | `SCH_YR = 2025_26`. Gives the pre-review baseline. |
+| AAP center areas | `Elementary/Middle_School_AAP_Attendance_Areas` | |
+| School points | `School_Facilities/0`, `FCPS_Title_1/0` | |
+| Capacity, membership, temporary classrooms, 5-yr projections | FCPS **Adopted CIP FY 2027-31** PDF, parsed | 201 schools |
+| Demographics (FRL, race) | NCES CCD 2024-25 school files (lunch 033, membership 052) | VDOE is blocked from the build environment; CCD has the same data one year behind |
+| Housing units by type (SFD/SFA/MF/MH), parcel points | `OpenData_S7/1` | About 340k parcels. Drives the student estimates. |
+| Population, parcel points | `OpenData_S7/0` | |
+| Housing forecast, years 1–6, parcel points | `OpenData_S6/0` | Drives the projections |
+| Roads (148k segments, class, speed, divided, bridge) | `Roadways/0` | Basis for the walk and drive networks |
+| Sidewalks + crosswalk connectors (500k) | `Sidewalks_Centerline/0` | Marks arterial segments that have a sidewalk |
+| Trails | `OpenData_A1` layers 3, 4 | |
+| Rail, streams | `Railroad_Lines/0`, `OpenData_S14/0` | |
+
+**Gaps & how they're handled**
+- **Students per SPA aren't published.** They're estimated: parcel housing units by type × student yield per level, with yields fitted by non-negative least squares so that the **2025-26 attendance areas reproduce each school's actual Sept-2025 membership**. The estimates are then rescaled per school to remove what's left over. Labeled "Estimated".
+- **SPA demographics** come from the school-level FRL% applied to each SPA, adjusted by a housing-mix factor (multifamily share) and raked so that every school's total matches. Labeled "Estimated".
+- **Traffic signals** aren't available (OSM/Overpass is blocked from the build environment). Signalized crossings are inferred where two arterials meet, or an arterial meets a collector, and labeled as an estimate. Bridges/overpasses never create an at-grade crossing.
+
+### 3b. Original inventory
 
 | Layer | Source | Status / risk |
 |---|---|---|
@@ -171,39 +210,50 @@ Real FCPS routing is far more detailed. The goal is a **defensible estimate** th
 
 ---
 
-## 10. Architecture & build phases
+## 10. Architecture (as built)
 
-**Stack (proposed)**
-- **Offline data pipeline**: Python (geopandas, osmnx/networkx or pandana, shapely). Output: compact GeoJSON/FlatGeobuf, plus binary distance matrices, plus a schools JSON. Re-run once a year.
-- **Frontend**: TypeScript + Vite + **MapLibre GL JS** (free, no token needed; can switch to Mapbox) with deck.gl for flow lines. Svelte or React for panels. Web Workers run the metrics, bus estimator, and optimizer.
-- **Hosting**: fully static (GitHub Pages / Vercel). No server needed.
+```
+pipeline/ (Python, run once a year)                         web/ (React + TypeScript + MapLibre, static)
+  fetch.py     public layers -> data/raw/                     model/engine.ts     grade-level routing, utilization,
+  schools.py   193 program schools + CIP + bell + CCD                            walk/ride split, feeders, islands,
+  students.py  parcels -> SPA students by grade, 6 yrs, FRL                       demographics  (~8 ms per recompute)
+  network.py   walk graph (8 barrier variants), walk          model/buses.ts      Clarke-Wright routes + fleet (~100 ms)
+               histograms, walksheds, drive times             model/optimizer.ts  simulated annealing (Web Worker)
+  export.py    web/public/data/ bundle (~24 MB, walk-        components/         map, controls, scorecard, inspector,
+               shed files lazy-loaded)                                            school table, optimizer, scenarios
+```
 
-**Phases**
-| # | Deliverable | Notes |
-|---|---|---|
-| 0 | Data feasibility spike: download all layers, confirm SPA availability, build one-pyramid prototype data | Decides between the SPA and census-block fallbacks |
-| 1 | Viewer: current and 2026-27 zones for all 3 levels, schools, utilization coloring, address search, "why here" card (basic) | Useful on its own |
-| 2 | Walk & barriers: pedestrian graph, barrier rules UI, walksheds, walker/rider/hazard classification | Your first two variables |
-| 3 | Editing & scorecard: click/paint SPAs to reassign, live metrics, feeder flows, scenario save/share/compare | The core simulator |
-| 4 | Bus estimator: stops, routes, tiers, calibration | Your third variable |
-| 5 | Optimizer with presets + explanations | |
-| 6 | Projections & pipeline, program layers, equity view, hot-spot demo scenarios, accessibility pass, mobile layout | |
+**Key modeling decisions**
+- **Unit of assignment.** SPA × level (ES / MS / HS). Students are routed **per grade**, so the model handles K-2/K-3 schools with upper-ES partners, the 6-8 middle schools (Glasgow, Holmes, Poe), secondary schools, AAP Level IV centers (from each SPA's AAP assignment) and TJHSST. A reassignment that leaves a grade unserved (for example, K-5 ES plus 7-8 MS) is flagged.
+- **Student estimates.** County parcel housing units by type × per-grade yields. The yields are fitted on HS pyramids and regularized toward typical FCPS yield ratios, then calibrated with IPF so the 2025-26 boundaries reproduce every school's Sept-2025 CIP membership. The City of Fairfax isn't in county parcel data, so its housing is synthesized on a grid and calibrated the same way.
+- **Projections.** Each school's CIP projection is split into new students from the county housing forecast (placed in the SPA where the units are built) and a cohort trend.
+- **Demographics.** One logit intercept per school plus a shared slope on apartment share, solved by fixed-point iteration so each school's *enrolled* FRL (residents plus AAP/TJ inflows) matches NCES CCD 2024-25.
+- **Walking.** County road centerlines plus trails. Limited-access roads are removed, so they can only be crossed on grade-separated roads. Each barrier road is split into left and right sides at every node, and the sides connect only at (inferred) signalized intersections. Barrier roads are walkable along only where county sidewalk data shows a sidewalk. Walk shares are pre-computed per (SPA, school, variant) as cumulative histograms in 0.1-mile bins, so the distance sliders update instantly.
+- **Buses.** Riders = non-walkers (including barrier-blocked students) × ridership. Each school gets savings-heuristic routes under a capacity and max-ride limit. Fleet = peak concurrent routes across the 2024-25 bell schedule, plus spares.
 
----
+## 11. Validation (data built Oct 2026)
 
-## 11. Open questions (need answers before building)
+| Check | Result |
+|---|---|
+| Modeled 2025-26 enrollment vs CIP Sept-2025 membership | mean abs error 0.0–0.2% across 192 schools (by construction) |
+| Modeled 2025-26 FRL% vs NCES 2024-25 | mean abs error 0.3 points |
+| Walk share, adopted 2026-27, ES (straight line / network / network + arterial barriers) | 71% / 42% / 38% |
+| General-ed bus fleet estimate | ~1,140 buses, 2,180 routes (FCPS runs ~1,625 incl. special-ed and program routes) |
+| Barrier side-splitting | 6 synthetic tests in `pipeline/tests/test_walk_graph.py` |
+| Optimizer bookkeeping | incremental cost equals full recompute (`web/scripts/check.ts`) |
+| Optimizer, "Fix overcrowding", ES, 300k moves | over-target ES 4 → 1, seat shortfall 457 → ~250, ~16 SPAs moved, ~1 s |
 
-1. **Which FCPS?** Fairfax County, VA is assumed. Confirm.
-2. **Audience & hosting.** A public website for the community, or a tool for a smaller group (a PTA, a civic association, a School Board member)? This decides how polished the onboarding needs to be and where it is hosted.
-3. **Data access.** Do you have, or can you get, **SPA polygons** and **SPA-level student counts** (from FCPS Facilities Planning or a FOIA request)? Without them we use census-based estimates. The tool works, but student counts are approximate.
-4. **Baseline.** Should the default "current" view show the **2025-26** boundaries, the **adopted 2026-27** ones, or both?
-5. **Scope for v1.** All ~200 schools countywide, or one region or pyramid first (e.g., one of the hot-spot areas) to prove the approach?
-6. **Equity metrics.** Show demographic impact (FRM/EL) only for information, let the optimizer use it, or leave it out? This is politically sensitive, so it's your call.
-7. **Special programs.** Model AAP centers, language immersion, and TJHSST, or treat every student as general ed in v1?
-8. **Bus realism.** Is a calibrated countywide estimate enough, or do you want approximate route lines drawn on the map (more work, more visual impact)?
-9. **Barrier defaults.** Do you know of FCPS's actual hazard designations (specific roads or crossings it treats as unwalkable), or should we derive defaults from speed/lanes/volume?
-10. **Tech preferences.** Any framework, hosting, or budget constraints (e.g., no paid map tiles)?
-11. **Timeline.** Is there a target date? For example, community meetings for the Jan 2027 hot-spot recommendations.
+## 12. Known limitations & next steps
+
+- Traffic signals and crossing guards are inferred, not observed. FCPS's own hazard designations aren't public. A per-road override (mark a crossing safe or unsafe) would need in-browser rerouting: the graph is ~90k nodes, which is feasible in a worker later.
+- Bus routes connect SPA centroids, not streets. They don't model special-ed, magnet or shuttle runs, or real stop placement.
+- The bell schedule is from 2024-25 (newest public PDF). Middle-school start times changed later.
+- SPA demographics are model estimates. EL% isn't in CCD school files. Race shares are inherited from the base school.
+- AAP center participation and TJ shares are uniform parameters. School-specific language immersion and special-ed program seats are reflected only through CIP program capacity.
+- Next: preset scenarios for the four Jan-2027 extended-study hot spots; per-road barrier overrides; capital what-ifs (add or remove capacity, a new school site); exporting a proposal as a PDF.
+
+## Answered questions
+All of the open questions from the first draft were answered in §0.
 
 ---
 
