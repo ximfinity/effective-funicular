@@ -250,7 +250,8 @@ pipeline/ (Python, run once a year)                         web/ (React + TypeSc
 - The bell schedule is from 2024-25 (newest public PDF). Middle-school start times changed later.
 - SPA demographics are model estimates. EL% isn't in CCD school files. Race shares are inherited from the base school.
 - AAP center participation and TJ shares are uniform parameters. School-specific language immersion and special-ed program seats are reflected only through CIP program capacity.
-- Next: preset scenarios for the four Jan-2027 extended-study hot spots; per-road barrier overrides; capital what-ifs (add or remove capacity, a new school site); exporting a proposal as a PDF.
+- Done in v1.1: **Hot spots** tab for the four Jan-2027 extended studies (focus the map, optimize within the study's schools); GitHub Pages deploy workflow.
+- Next: per-road barrier overrides; capital what-ifs (add or remove capacity, a new school site); exporting a proposal as a PDF.
 
 ## Answered questions
 All of the open questions from the first draft were answered in §0.

@@ -10,6 +10,7 @@ import type { BusResult } from '../model/buses'
 import { ramp, ROUTE_COLORS, utilColor, mix } from '../lib/colors'
 import { fmt, pct } from '../lib/format'
 import type { Selection } from '../App'
+import type { Focus } from './HotSpots'
 
 export type ColorMode = 'school' | 'util' | 'walk' | 'density' | 'frl' | 'change' | 'growth' | 'routes'
 export interface Layers {
@@ -42,6 +43,7 @@ interface Props {
   onSchoolClick: (k: number) => void
   onPaintDrag: (i: number) => void
   baseKey: '2025' | '2026'
+  focus: Focus | null
 }
 
 const DATA = DATA_URL
@@ -97,6 +99,7 @@ export function MapView(props: Props) {
       m.addLayer({ id: 'spa-fill', type: 'fill', source: 'spa', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], '#cccccc'], 'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.85, 0.62] } }, firstLabel)
       m.addLayer({ id: 'spa-line', type: 'line', source: 'spa', paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 0.2, 13, 1], 'line-opacity': 0.6 } }, firstLabel)
       m.addLayer({ id: 'spa-sel', type: 'line', source: 'spa', filter: ['==', ['get', 'i'], -1], paint: { 'line-color': '#111', 'line-width': 3 } })
+      m.addLayer({ id: 'spa-focus', type: 'line', source: 'spa', filter: ['in', ['get', 'i'], ['literal', []]], paint: { 'line-color': '#d7301f', 'line-width': 3 } })
       m.addLayer({ id: 'spa-lock', type: 'line', source: 'spa', filter: ['in', ['get', 'i'], ['literal', []]], paint: { 'line-color': '#333', 'line-width': 1.5, 'line-dasharray': [1, 1] } })
       m.addLayer({ id: 'walkshed', type: 'fill', source: 'walkshed', paint: { 'fill-color': '#1b9e77', 'fill-opacity': 0.12, 'fill-outline-color': '#1b9e77' } })
       m.addLayer({ id: 'walkshed-line', type: 'line', source: 'walkshed', paint: { 'line-color': '#1b7e5f', 'line-width': 2, 'line-dasharray': [2, 1] } })
@@ -168,7 +171,7 @@ export function MapView(props: Props) {
   }, [])
 
   // ---- SPA colors
-  const { model, assignment, base, params, level, colorMode, result, buses, colors, layers, selection, locked } = props
+  const { model, assignment, base, params, level, colorMode, result, buses, colors, layers, selection, locked, focus } = props
   useEffect(() => {
     const m = map.current
     if (!ready || !m) return
@@ -218,9 +221,25 @@ export function MapView(props: Props) {
           c = routeColor.get(i) ?? '#eeeeee'
           break
       }
+      if (focus && !(focus.schools.has(k) || focus.spas.includes(i))) c = mix(c, '#ffffff', 0.75)
       m.setFeatureState({ source: 'spa', id: i }, { color: c })
     }
-  }, [ready, model, assignment, base, level, colorMode, result, buses, colors, selection, params])
+  }, [ready, model, assignment, base, level, colorMode, result, buses, colors, selection, params, focus])
+
+  // ---- zoom to a hot-spot focus and outline its called-out SPAs
+  useEffect(() => {
+    const m = map.current
+    if (!ready || !m) return
+    m.setFilter('spa-focus', ['in', ['get', 'i'], ['literal', focus?.spas ?? []]])
+    if (!focus) return
+    // read current props via the ref: re-zoom only when the focus or level changes, not on every edit
+    const { model, assignment } = propsRef.current
+    const A = assignment[level]
+    const pts: [number, number][] = []
+    for (let i = 0; i < model.S; i++) if (focus.schools.has(A[i]) || focus.spas.includes(i)) pts.push(model.raw.spa.centroid[i])
+    for (const k of focus.schools) if (model.schools[k].level === level) pts.push([model.schools[k].lon, model.schools[k].lat])
+    fitPoints(m, pts)
+  }, [ready, focus, level])
 
   // ---- dissolved boundaries from shared SPA edges
   useEffect(() => {
@@ -354,9 +373,7 @@ export function MapView(props: Props) {
     if (selection.kind === 'school') {
       // zoom to the school's attendance area so its routes and walk area are readable
       const s = model.schools[selection.k]
-      const b = new maplibregl.LngLatBounds([s.lon, s.lat], [s.lon, s.lat])
-      for (const i of propsRef.current.result.school[selection.k].spas) b.extend(model.raw.spa.centroid[i])
-      m.fitBounds(b, { padding: 60, maxZoom: 14, duration: 600 })
+      fitPoints(m, [[s.lon, s.lat], ...propsRef.current.result.school[selection.k].spas.map((i) => model.raw.spa.centroid[i])])
       return
     }
     const c = model.raw.spa.centroid[selection.i]
@@ -364,6 +381,14 @@ export function MapView(props: Props) {
   }, [ready, selection, model])
 
   return <div ref={el} className="mapcanvas" />
+}
+
+function fitPoints(m: maplibregl.Map, pts: [number, number][]) {
+  const ok = pts.filter(([x, y]) => Number.isFinite(x) && Number.isFinite(y))
+  if (!ok.length) return
+  const xs = ok.map((p) => p[0]), ys = ok.map((p) => p[1])
+  const pad = 0.004
+  m.fitBounds([[Math.min(...xs) - pad, Math.min(...ys) - pad], [Math.max(...xs) + pad, Math.max(...ys) + pad]], { padding: 50, maxZoom: 14, duration: 600 })
 }
 
 function tipHtml(p: Props, i: number) {

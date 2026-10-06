@@ -142,3 +142,10 @@ table.schools tr:hover td { background: #f6f8fb; }
   .right { order: 3; } .left { order: 4; }
   .controls, .tabbody { padding: 10px 16px; }
 }
+
+.hot { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; }
+.hot.on { border-color: var(--accent); box-shadow: 0 0 0 2px #dbe7f3; }
+.hot h4 { margin: 0 0 4px; font-size: 13px; }
+.hot p { margin: 4px 0; line-height: 1.4; }
+.hot .btnrow { align-items: center; }
+.focusnote { background: #eef4fb; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; }

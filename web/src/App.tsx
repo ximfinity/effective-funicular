@@ -7,6 +7,7 @@ import { Inspector } from './components/Inspector'
 import { OptimizerPanel } from './components/OptimizerPanel'
 import { ScenarioBar } from './components/ScenarioBar'
 import { About } from './components/About'
+import { HotSpots, type Focus } from './components/HotSpots'
 import { loadModel } from './model/load'
 import { baselineAssignment, cloneAssignment, compute } from './model/engine'
 import { estimateBuses } from './model/buses'
@@ -41,7 +42,8 @@ function Explorer({ model }: { model: Model }) {
   const [paintSchool, setPaintSchool] = useState<number | null>(null)
   const [locked, setLocked] = useState<Set<number>>(new Set())
   const [preview, setPreview] = useState<Assignment | null>(null)
-  const [tab, setTab] = useState<'scores' | 'schools' | 'optimize' | 'about'>('scores')
+  const [tab, setTab] = useState<'scores' | 'schools' | 'hot' | 'optimize' | 'about'>('scores')
+  const [focus, setFocus] = useState<Focus | null>(null)
   const [layers, setLayers] = useState<Layers>({ boundaries: true, schools: true, barriers: false, highways: true, signals: false, routes: false, walkshed: true, feeders: false, official: false })
   const undo = useRef<Assignment[]>([])
   const [undoCount, setUndoCount] = useState(0)
@@ -122,7 +124,7 @@ function Explorer({ model }: { model: Model }) {
         <MapView
           model={model} assignment={shown} base={base} params={params} level={level} colorMode={colorMode}
           result={result} buses={buses} colors={colors} layers={layers} selection={selection}
-          paintSchool={paintSchool} locked={locked} onSpaClick={onSpaClick} baseKey={baseKey}
+          paintSchool={paintSchool} locked={locked} onSpaClick={onSpaClick} baseKey={baseKey} focus={focus}
           onSchoolClick={(k) => setSelection({ kind: 'school', k })}
           onPaintDrag={(i) => paintSchool !== null && reassign(i, paintSchool)}
         />
@@ -130,9 +132,9 @@ function Explorer({ model }: { model: Model }) {
       </main>
       <aside className="right">
         <nav className="tabs">
-          {(['scores', 'schools', 'optimize', 'about'] as const).map((t) => (
+          {(['scores', 'schools', 'hot', 'optimize', 'about'] as const).map((t) => (
             <button key={t} className={tab === t ? 'on' : ''} onClick={() => setTab(t)}>
-              {{ scores: 'Scorecard', schools: 'Schools', optimize: 'Optimize', about: 'Method' }[t]}
+              {{ scores: 'Scorecard', schools: 'Schools', hot: 'Hot spots', optimize: 'Optimize', about: 'Method' }[t]}
             </button>
           ))}
         </nav>
@@ -151,8 +153,17 @@ function Explorer({ model }: { model: Model }) {
           {tab === 'schools' && <SchoolTable model={model} level={level} result={result} base={baseResult} colors={colors} onSelect={(k) => setSelection({ kind: 'school', k })} />}
           {tab === 'optimize' && (
             <OptimizerPanel
+              key={focus?.id ?? 'county'}
               model={model} assignment={assignment} base={base} params={params} locked={locked} level={level}
               preview={preview} setPreview={setPreview} onAccept={(a) => { replace(a); setPreview(null) }}
+              focus={focus} onClearFocus={() => setFocus(null)}
+            />
+          )}
+          {tab === 'hot' && (
+            <HotSpots
+              model={model} result={result} base={baseResult} focus={focus}
+              onFocus={(f, L) => { setFocus(f); if (L) setLevel(L); setSelection(null) }}
+              onOptimize={(f) => { setFocus(f); setLevel(f.levels[0]); setSelection(null); setTab('optimize') }}
             />
           )}
           {tab === 'about' && <About model={model} />}

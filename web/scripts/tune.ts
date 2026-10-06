@@ -26,3 +26,11 @@ for (const preset of ['balanced', 'crowding', 'buses']) for (const T0 of [25, 8,
 }
 const r0 = compute(m, a26, p, a26)
 console.log('baseline', ['ES','MS','HS'].map((L) => `${L} over ${r0.totals[L as 'ES'].over} short ${Math.round(r0.totals[L as 'ES'].seatsShort)} riders ${Math.round(r0.totals[L as 'ES'].riders)}`).join(' | '))
+
+// focused run: Glasgow / Falls Church hot spot
+import { HOTSPOTS, focusFor } from '../src/lib/hotspots'
+const f = focusFor(m, HOTSPOTS.find((h) => h.id === 'glasgow')!)
+const of = new Optimizer(m, { assignment: a26, base: a26, params: p, weights: PRESETS.crowding.w, levels: f.levels, locked: [], iterations: 100000, allowIslands: false, seed: 5, allowedSchools: [...f.schools] })
+for (let i = 0; i < 100000; i++) of.step(4 * Math.pow(0.05 / 4, i / 100000))
+const rf = compute(m, of.bestA, p, a26), r0f = compute(m, a26, p, a26)
+console.log('glasgow focus:', [...f.schools].map((k) => `${m.schools[k].name} ${m.schools[k].level} ${(100 * r0f.school[k].util).toFixed(0)}→${(100 * rf.school[k].util).toFixed(0)}%`).join(', '))

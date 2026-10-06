@@ -5,6 +5,7 @@ import { compute } from '../model/engine'
 import { DATA_URL } from '../model/load'
 import { fmt, pct } from '../lib/format'
 import { Slider } from './Controls'
+import type { Focus } from './HotSpots'
 
 interface Props {
   model: Model
@@ -16,6 +17,8 @@ interface Props {
   preview: Assignment | null
   setPreview: (a: Assignment | null) => void
   onAccept: (a: Assignment) => void
+  focus: Focus | null
+  onClearFocus: () => void
 }
 
 interface Prog { iter: number; cost: number; best: number; start: number; accepted: number; breakdown: Record<string, number> }
@@ -33,7 +36,7 @@ const WEIGHT_LABELS: [keyof Weights, string, string][] = [
 export function OptimizerPanel(p: Props) {
   const [preset, setPreset] = useState('balanced')
   const [w, setW] = useState<Weights>(PRESETS.balanced.w)
-  const [levels, setLevels] = useState<Level[]>([p.level])
+  const [levels, setLevels] = useState<Level[]>(p.focus?.levels ?? [p.level])
   const [iters, setIters] = useState(300000)
   const [islands, setIslands] = useState(false)
   const [running, setRunning] = useState(false)
@@ -58,7 +61,8 @@ export function OptimizerPanel(p: Props) {
     }
     worker.current.postMessage({
       type: 'run', dataUrl: DATA_URL,
-      req: { assignment: p.assignment, base: p.base, params: p.params, weights: w, levels, locked: [...p.locked], iterations: iters, allowIslands: islands, seed: Math.floor(Math.random() * 1e9) },
+      req: { assignment: p.assignment, base: p.base, params: p.params, weights: w, levels, locked: [...p.locked], iterations: iters, allowIslands: islands, seed: Math.floor(Math.random() * 1e9),
+        allowedSchools: p.focus ? [...p.focus.schools] : undefined },
     })
   }
   const stop = () => worker.current?.postMessage({ type: 'stop' })
@@ -87,6 +91,11 @@ export function OptimizerPanel(p: Props) {
   return (
     <div className="optimizer">
       <p className="hint">Searches for boundary changes that improve the weighted goals below, moving one planning area at a time to a neighboring school while keeping every attendance area in one piece. Locked areas (dashed outline) and each school's own building site never move.</p>
+      {p.focus && (
+        <div className="focusnote">
+          Restricted to <b>{p.focus.title}</b>: only its {p.focus.schools.size} schools trade areas. <button className="small" onClick={p.onClearFocus}>Countywide</button>
+        </div>
+      )}
       <label className="row">
         <span>Goal preset</span>
         <select value={preset} onChange={(e) => { setPreset(e.target.value); setW(PRESETS[e.target.value].w) }}>

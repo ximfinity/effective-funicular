@@ -18,6 +18,9 @@ test changes that relieve overcrowding, cut busing and use capacity better.
 - **Optimizer:** simulated annealing with weighted goals (overcrowding, empty seats, busing, disruption,
   feeders, compactness, demographics). It keeps every attendance area contiguous, and it never moves a
   locked area or the planning area that contains a school's own building.
+- **Hot spots:** the four extended studies FCPS left open, with recommendations due January 2027
+  (Lorton-area ES; Bren Mar Park feeders; Glasgow MS / Falls Church neighborhoods; Keene Mill island and
+  Rolling Valley SPA 8922). Focus the map on one, and optimize only among its schools.
 - **"Why is my home here?":** address search and a per-area explanation, with alternatives and their
   utilization impact.
 
@@ -32,6 +35,12 @@ npm run dev        # http://localhost:5173
 npm run build      # static site in web/dist (relative paths: host anywhere)
 npx tsx scripts/check.ts   # headless model validation against the data bundle
 ```
+
+### Publish
+
+`.github/workflows/pages.yml` builds the site, runs the model check and deploys to GitHub Pages on every
+push that touches `web/`. Enable it once under **Settings → Pages → Source: GitHub Actions**. The site is
+fully static, so `web/dist` also works on Netlify, Vercel or any file host.
 
 The data bundle in `web/public/data/` is committed, so the app runs without the pipeline.
 

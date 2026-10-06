@@ -44,6 +44,7 @@ export interface OptRequest {
   iterations: number
   allowIslands: boolean
   seed: number
+  allowedSchools?: number[] // if set, only these schools may gain areas (focus studies)
 }
 
 export interface OptProgress {
@@ -79,6 +80,8 @@ export class Optimizer {
   em = new Map<number, Map<number, number>>()
   mh = new Map<number, Map<number, number>>()
   lockedSet: Set<number>
+  allowed: Set<number> | null
+  pool: Int32Array | null = null // SPAs eligible to move when restricted to a focus area
   siteLock: Map<number, number>[] = []
   cost = 0
   best = Infinity
@@ -105,6 +108,12 @@ export class Optimizer {
     }
     this.n = p.year === 0 ? m.raw.spa.n : m.raw.spa.proj[p.year - 1]
     this.lockedSet = new Set(r.locked)
+    this.allowed = r.allowedSchools ? new Set(r.allowedSchools) : null
+    if (this.allowed) {
+      const pool: number[] = []
+      for (let i = 0; i < m.S; i++) if (r.levels.some((L) => this.allowed!.has(this.A[L][i]))) pool.push(i)
+      this.pool = Int32Array.from(pool)
+    }
     for (let k = 0; k < K; k++) {
       const s = m.schools[k]
       if (s.site >= 0 && !s.upper && !s.magnet) {
@@ -278,7 +287,7 @@ export class Optimizer {
   step(T: number) {
     const { m } = this
     const L = this.r.levels[Math.floor(this.rand() * this.r.levels.length)]
-    const i = Math.floor(this.rand() * m.S)
+    const i = this.pool ? this.pool[Math.floor(this.rand() * this.pool.length)] : Math.floor(this.rand() * m.S)
     if (this.lockedSet.has(i)) return false
     const A = this.A[L]
     const a = A[i]
@@ -292,6 +301,7 @@ export class Optimizer {
     if (b < 0 || b === a) return false
     const sb = m.schools[b]
     if (sb.upper || sb.magnet || sb.level !== L) return false
+    if (this.allowed && (!this.allowed.has(b) || !this.allowed.has(a))) return false
     if (!this.r.allowIslands && !this.contiguousWithout(L, i, a)) return false
 
     // delta
