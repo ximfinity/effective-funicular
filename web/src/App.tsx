@@ -166,6 +166,15 @@ function Explorer({ model }: { model: Model }) {
               model={model} result={result} base={baseResult} focus={focus}
               onFocus={(f, L) => { setFocus(f); if (L) setLevel(L); setSelection(null) }}
               onOptimize={(f) => { setFocus(f); setLevel(f.levels[0]); setSelection(null); setTab('optimize') }}
+              onLoadScenario={(moves, f) => {
+                const a = baselineAssignment(model, '2026')
+                const pos = new Map(model.raw.spa.id.map((id, i) => [id, i]))
+                for (const [spa, name] of moves) {
+                  const i = pos.get(spa), k = model.schools.findIndex((s) => s.name === name && s.level === 'ES')
+                  if (i !== undefined && k >= 0) a.ES[i] = k
+                }
+                replace(a); setBaseKey('2026'); setFocus(f); setLevel('ES'); setColorMode('change')
+              }}
             />
           )}
           {tab === 'about' && <About model={model} />}

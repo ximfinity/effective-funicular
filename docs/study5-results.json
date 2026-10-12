@@ -1,0 +1,1126 @@
+{
+ "model": {
+  "calib": "model",
+  "scale": {},
+  "5A": {
+   "label": "5-A: no change (adopted 2026-27)",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 728,
+     "util25": 1.0930366366366369,
+     "util27": 1.1066066066066067,
+     "util31": 1.1291165165165165,
+     "enroll27": 737,
+     "walkers": 406,
+     "riders": 265,
+     "hazard": 187,
+     "walkShare": 0.5508828441791046,
+     "frl": 0.31192371397557667,
+     "pieces": 1,
+     "routes": 6,
+     "avgRide": 12.39193082448751,
+     "maxRide": 19.188763707733337
+    },
+    "Keene Mill": {
+     "enroll25": 740,
+     "util25": 0.973125263157895,
+     "util27": 0.9478157894736843,
+     "util31": 0.8939968421052631,
+     "enroll27": 720,
+     "walkers": 231,
+     "riders": 391,
+     "hazard": 4,
+     "walkShare": 0.32117795585418,
+     "frl": 0.20591160785184784,
+     "pieces": 2,
+     "routes": 8,
+     "avgRide": 28.11868249757886,
+     "maxRide": 44.92397300266666
+    },
+    "White Oaks": {
+     "enroll25": 715,
+     "util25": 0.8484389086595493,
+     "util27": 0.8547928825622773,
+     "util31": 0.8348578884934754,
+     "enroll27": 721,
+     "walkers": 365,
+     "riders": 285,
+     "hazard": 10,
+     "walkShare": 0.5061325543609798,
+     "frl": 0.24560339299552156,
+     "pieces": 1,
+     "routes": 7,
+     "avgRide": 32.21341568983939,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 87,
+    "Lake Braddock": 13
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [],
+   "esIslands": 15,
+   "esMoved": 0,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "5B": {
+   "label": "5-B: 8816 → White Oaks; 7917 + 7919 → Keene Mill",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 573,
+     "util25": 0.8596319819819823,
+     "util27": 0.8703079579579581,
+     "util31": 0.8880932432432432,
+     "enroll27": 580,
+     "walkers": 344,
+     "riders": 189,
+     "hazard": 187,
+     "walkShare": 0.5930368191612129,
+     "frl": 0.3260284388995577,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 11.10669053042955,
+     "maxRide": 18.5646229584
+    },
+    "Keene Mill": {
+     "enroll25": 798,
+     "util25": 1.0495982894736844,
+     "util27": 1.0319464473684212,
+     "util31": 0.9916661842105263,
+     "enroll27": 784,
+     "walkers": 280,
+     "riders": 403,
+     "hazard": 4,
+     "walkShare": 0.3571219493871636,
+     "frl": 0.2182982612189307,
+     "pieces": 2,
+     "routes": 8,
+     "avgRide": 28.375859592514495,
+     "maxRide": 44.92397300266666
+    },
+    "White Oaks": {
+     "enroll25": 813,
+     "util25": 0.9638932384341636,
+     "util27": 0.965629893238434,
+     "util31": 0.9372218268090154,
+     "enroll27": 814,
+     "walkers": 365,
+     "riders": 359,
+     "hazard": 10,
+     "walkShare": 0.44803760543275045,
+     "frl": 0.2395654659679175,
+     "pieces": 1,
+     "routes": 8,
+     "avgRide": 28.673461250896768,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 101,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7917,
+     "fraction": 1,
+     "students": 63,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 106,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 270,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "5C": {
+   "label": "5-C (recommended): 8816 → White Oaks; 7919 + parts of 7917/7904 → Keene Mill",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 604,
+     "util25": 0.9066704564564565,
+     "util27": 0.9179254354354355,
+     "util31": 0.9366676696696697,
+     "enroll27": 611,
+     "walkers": 373,
+     "riders": 191,
+     "hazard": 187,
+     "walkShare": 0.6094834488901842,
+     "frl": 0.3384049333794443,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 10.147171959251606,
+     "maxRide": 13.088143784960002
+    },
+    "Keene Mill": {
+     "enroll25": 766,
+     "util25": 1.0083777315789477,
+     "util27": 0.9902185000000004,
+     "util31": 0.9490996473684209,
+     "enroll27": 753,
+     "walkers": 274,
+     "riders": 383,
+     "hazard": 4,
+     "walkShare": 0.3644531935442318,
+     "frl": 0.20370459409237784,
+     "pieces": 2,
+     "routes": 8,
+     "avgRide": 28.299249014781196,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 813,
+     "util25": 0.9638932384341636,
+     "util27": 0.965629893238434,
+     "util31": 0.9372218268090154,
+     "enroll27": 814,
+     "walkers": 365,
+     "riders": 359,
+     "hazard": 10,
+     "walkShare": 0.44803760543275045,
+     "frl": 0.2395654659679175,
+     "pieces": 1,
+     "routes": 8,
+     "avgRide": 28.673461250896768,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 101,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 106,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    },
+    {
+     "spa": 7917,
+     "fraction": 0.25,
+     "students": 21,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7904,
+     "fraction": 0.08,
+     "students": 8,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8278,
+     "walkTo": 0.284,
+     "driveFromMin": 2.2666666666666666,
+     "driveToMin": 2.966666666666667,
+     "frl": 0.128
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 236,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "RV": {
+   "label": "Alt (not proposed): 5-C + SPA 8922 Rolling Valley → Saratoga",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 604,
+     "util25": 0.9066704564564565,
+     "util27": 0.9179254354354355,
+     "util31": 0.9366676696696697,
+     "enroll27": 611,
+     "walkers": 373,
+     "riders": 191,
+     "hazard": 187,
+     "walkShare": 0.6094834488901842,
+     "frl": 0.3384049333794443,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 10.147171959251606,
+     "maxRide": 13.088143784960002
+    },
+    "Keene Mill": {
+     "enroll25": 766,
+     "util25": 1.0083777315789477,
+     "util27": 0.9902185000000004,
+     "util31": 0.9490996473684209,
+     "enroll27": 753,
+     "walkers": 274,
+     "riders": 383,
+     "hazard": 4,
+     "walkShare": 0.3644531935442318,
+     "frl": 0.20370459409237784,
+     "pieces": 2,
+     "routes": 8,
+     "avgRide": 28.299249014781196,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 813,
+     "util25": 0.9638932384341636,
+     "util27": 0.965629893238434,
+     "util31": 0.9372218268090154,
+     "enroll27": 814,
+     "walkers": 365,
+     "riders": 359,
+     "hazard": 10,
+     "walkShare": 0.44803760543275045,
+     "frl": 0.2395654659679175,
+     "pieces": 1,
+     "routes": 8,
+     "avgRide": 28.673461250896768,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 375,
+     "util25": 0.6780311030741409,
+     "util27": 0.6588470162748645,
+     "util31": 0.6183515370705243,
+     "enroll27": 364,
+     "walkers": 207,
+     "riders": 126,
+     "hazard": 9,
+     "walkShare": 0.5675382593955577,
+     "frl": 0.23582681126325136,
+     "pieces": 1,
+     "routes": 2,
+     "avgRide": 18.46044328687269,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 776,
+     "util25": 0.9605366336633664,
+     "util27": 0.959940594059406,
+     "util31": 0.9085158415841589,
+     "enroll27": 776,
+     "walkers": 58,
+     "riders": 574,
+     "hazard": 81,
+     "walkShare": 0.07442872259009425,
+     "frl": 0.38729849052127807,
+     "pieces": 1,
+     "routes": 11,
+     "avgRide": 10.509121703050448,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 100
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 101,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 106,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    },
+    {
+     "spa": 7917,
+     "fraction": 0.25,
+     "students": 21,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7904,
+     "fraction": 0.08,
+     "students": 8,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8278,
+     "walkTo": 0.284,
+     "driveFromMin": 2.2666666666666666,
+     "driveToMin": 2.966666666666667,
+     "frl": 0.128
+    },
+    {
+     "spa": 8922,
+     "fraction": 1,
+     "students": 68,
+     "from": "Rolling Valley",
+     "to": "Saratoga",
+     "walkFrom": 0.0062,
+     "walkTo": 0,
+     "driveFromMin": 6.3,
+     "driveToMin": 6.9,
+     "frl": 0.415
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 304,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "optimizer": {
+   "moves": [
+    {
+     "spa": 7822,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "students": 54
+    },
+    {
+     "spa": 8816,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "students": 101
+    }
+   ],
+   "util": {
+    "Cardinal Forest": 1.031054054054054,
+    "Keene Mill": 0.8910821052631579,
+    "White Oaks": 0.965629893238434
+   }
+  }
+ },
+ "fcps": {
+  "calib": "fcps",
+  "scale": {
+   "7917": 0.6564211689548177,
+   "7919": 0.6564211689548177,
+   "8816": 1.0758738437649673
+  },
+  "5A": {
+   "label": "5-A: no change (adopted 2026-27)",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 728,
+     "util25": 1.0930369310702226,
+     "util27": 1.1066067610920933,
+     "util31": 1.129116743863016,
+     "enroll27": 737,
+     "walkers": 414,
+     "riders": 258,
+     "hazard": 207,
+     "walkShare": 0.5617574329169892,
+     "frl": 0.3148920368344294,
+     "pieces": 1,
+     "routes": 6,
+     "avgRide": 11.691626148294587,
+     "maxRide": 22.429488567545892
+    },
+    "Keene Mill": {
+     "enroll25": 740,
+     "util25": 0.9731250051410953,
+     "util27": 0.9478156540956133,
+     "util31": 0.8939966428779362,
+     "enroll27": 720,
+     "walkers": 225,
+     "riders": 396,
+     "hazard": 4,
+     "walkShare": 0.31301769389207645,
+     "frl": 0.2061441490267454,
+     "pieces": 2,
+     "routes": 8,
+     "avgRide": 28.184930437583187,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 715,
+     "util25": 0.8484389086595493,
+     "util27": 0.8547928825622773,
+     "util31": 0.8348578884934754,
+     "enroll27": 721,
+     "walkers": 365,
+     "riders": 285,
+     "hazard": 10,
+     "walkShare": 0.5061325543609798,
+     "frl": 0.24560339299552156,
+     "pieces": 1,
+     "routes": 7,
+     "avgRide": 32.21341568983939,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 87,
+    "Lake Braddock": 13
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [],
+   "esIslands": 15,
+   "esMoved": 0,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "5B": {
+   "label": "5-B: 8816 → White Oaks; 7917 + 7919 → Keene Mill",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 626,
+     "util25": 0.9398251748223184,
+     "util27": 0.9514953259237033,
+     "util31": 0.9709039650756577,
+     "enroll27": 634,
+     "walkers": 373,
+     "riders": 208,
+     "hazard": 207,
+     "walkShare": 0.5888399170129022,
+     "frl": 0.3238445652157546,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 10.815967314050539,
+     "maxRide": 18.334347758246835
+    },
+    "Keene Mill": {
+     "enroll25": 737,
+     "util25": 0.9696070843452363,
+     "util27": 0.9514726247609573,
+     "util31": 0.9104828853083825,
+     "enroll27": 723,
+     "walkers": 257,
+     "riders": 373,
+     "hazard": 4,
+     "walkShare": 0.35604631813487614,
+     "frl": 0.21566159706594612,
+     "pieces": 2,
+     "routes": 7,
+     "avgRide": 30.399692222631476,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 820,
+     "util25": 0.972653202213472,
+     "util27": 0.9740395232698525,
+     "util31": 0.9449885722719353,
+     "enroll27": 821,
+     "walkers": 365,
+     "riders": 365,
+     "hazard": 10,
+     "walkShare": 0.4441693532603914,
+     "frl": 0.23916343059699527,
+     "pieces": 1,
+     "routes": 9,
+     "avgRide": 26.93596591178683,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 108,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7917,
+     "fraction": 1,
+     "students": 41,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 70,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 219,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "5C": {
+   "label": "5-C (recommended): 8816 → White Oaks; 7919 + parts of 7917/7904 → Keene Mill",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 643,
+     "util25": 0.9658134084054109,
+     "util27": 0.9778036774035738,
+     "util31": 0.997741168184739,
+     "enroll27": 651,
+     "walkers": 389,
+     "riders": 209,
+     "hazard": 207,
+     "walkShare": 0.5978994766191991,
+     "frl": 0.3325322544071469,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 10.487698604907337,
+     "maxRide": 16.903912729117753
+    },
+    "Keene Mill": {
+     "enroll25": 720,
+     "util25": 0.9468331849158422,
+     "util27": 0.9284182009641236,
+     "util31": 0.8869650204785822,
+     "enroll27": 706,
+     "walkers": 255,
+     "riders": 361,
+     "hazard": 4,
+     "walkShare": 0.36081077305547704,
+     "frl": 0.20495707720668022,
+     "pieces": 2,
+     "routes": 7,
+     "avgRide": 30.61355717732486,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 820,
+     "util25": 0.972653202213472,
+     "util27": 0.9740395232698525,
+     "util31": 0.9449885722719353,
+     "enroll27": 821,
+     "walkers": 365,
+     "riders": 365,
+     "hazard": 10,
+     "walkShare": 0.4441693532603914,
+     "frl": 0.23916343059699527,
+     "pieces": 1,
+     "routes": 9,
+     "avgRide": 26.93596591178683,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 440,
+     "util25": 0.7962994575045207,
+     "util27": 0.7737569620253166,
+     "util31": 0.7260708860759492,
+     "enroll27": 428,
+     "walkers": 207,
+     "riders": 177,
+     "hazard": 9,
+     "walkShare": 0.4841744228157115,
+     "frl": 0.2624356592712666,
+     "pieces": 1,
+     "routes": 3,
+     "avgRide": 16.4454736045531,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 711,
+     "util25": 0.8795930693069308,
+     "util27": 0.8812955445544554,
+     "util31": 0.8347920792079211,
+     "enroll27": 712,
+     "walkers": 58,
+     "riders": 523,
+     "hazard": 81,
+     "walkShare": 0.08107059274234546,
+     "frl": 0.3848264632907113,
+     "pieces": 1,
+     "routes": 10,
+     "avgRide": 10.361424287531547,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 91,
+    "Key": 9
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 108,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 70,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    },
+    {
+     "spa": 7917,
+     "fraction": 0.25,
+     "students": 14,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7904,
+     "fraction": 0.08,
+     "students": 9,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8278,
+     "walkTo": 0.284,
+     "driveFromMin": 2.2666666666666666,
+     "driveToMin": 2.966666666666667,
+     "frl": 0.128
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 201,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "RV": {
+   "label": "Alt (not proposed): 5-C + SPA 8922 Rolling Valley → Saratoga",
+   "schools": {
+    "Cardinal Forest": {
+     "enroll25": 643,
+     "util25": 0.9658134084054109,
+     "util27": 0.9778036774035738,
+     "util31": 0.997741168184739,
+     "enroll27": 651,
+     "walkers": 389,
+     "riders": 209,
+     "hazard": 207,
+     "walkShare": 0.5978994766191991,
+     "frl": 0.3325322544071469,
+     "pieces": 1,
+     "routes": 5,
+     "avgRide": 10.487698604907337,
+     "maxRide": 16.903912729117753
+    },
+    "Keene Mill": {
+     "enroll25": 720,
+     "util25": 0.9468331849158422,
+     "util27": 0.9284182009641236,
+     "util31": 0.8869650204785822,
+     "enroll27": 706,
+     "walkers": 255,
+     "riders": 361,
+     "hazard": 4,
+     "walkShare": 0.36081077305547704,
+     "frl": 0.20495707720668022,
+     "pieces": 2,
+     "routes": 7,
+     "avgRide": 30.61355717732486,
+     "maxRide": 43.94817066666667
+    },
+    "White Oaks": {
+     "enroll25": 820,
+     "util25": 0.972653202213472,
+     "util27": 0.9740395232698525,
+     "util31": 0.9449885722719353,
+     "enroll27": 821,
+     "walkers": 365,
+     "riders": 365,
+     "hazard": 10,
+     "walkShare": 0.4441693532603914,
+     "frl": 0.23916343059699527,
+     "pieces": 1,
+     "routes": 9,
+     "avgRide": 26.93596591178683,
+     "maxRide": 44.83722026666666
+    },
+    "Rolling Valley": {
+     "enroll25": 375,
+     "util25": 0.6780311030741409,
+     "util27": 0.6588470162748645,
+     "util31": 0.6183515370705243,
+     "enroll27": 364,
+     "walkers": 207,
+     "riders": 126,
+     "hazard": 9,
+     "walkShare": 0.5675382593955577,
+     "frl": 0.23582681126325136,
+     "pieces": 1,
+     "routes": 2,
+     "avgRide": 18.46044328687269,
+     "maxRide": 22.052637115733333
+    },
+    "Saratoga": {
+     "enroll25": 776,
+     "util25": 0.9605366336633664,
+     "util27": 0.959940594059406,
+     "util31": 0.9085158415841589,
+     "enroll27": 776,
+     "walkers": 58,
+     "riders": 574,
+     "hazard": 81,
+     "walkShare": 0.07442872259009425,
+     "frl": 0.38729849052127807,
+     "pieces": 1,
+     "routes": 11,
+     "avgRide": 10.509121703050448,
+     "maxRide": 15.999648
+    }
+   },
+   "feederKM": {
+    "Irving": 100
+   },
+   "feederRV": {
+    "Irving": 100
+   },
+   "moved": [
+    {
+     "spa": 8816,
+     "fraction": 1,
+     "students": 108,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "walkFrom": 0,
+     "walkTo": 0,
+     "driveFromMin": 5.083333333333333,
+     "driveToMin": 4.1,
+     "frl": 0.193
+    },
+    {
+     "spa": 7919,
+     "fraction": 1,
+     "students": 70,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.1003,
+     "walkTo": 0.3733,
+     "driveFromMin": 5.183333333333334,
+     "driveToMin": 4.633333333333334,
+     "frl": 0.128
+    },
+    {
+     "spa": 7917,
+     "fraction": 0.25,
+     "students": 14,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8947,
+     "walkTo": 0.202,
+     "driveFromMin": 2.45,
+     "driveToMin": 3.65,
+     "frl": 0.483
+    },
+    {
+     "spa": 7904,
+     "fraction": 0.08,
+     "students": 9,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "walkFrom": 0.8278,
+     "walkTo": 0.284,
+     "driveFromMin": 2.2666666666666666,
+     "driveToMin": 2.966666666666667,
+     "frl": 0.128
+    },
+    {
+     "spa": 8922,
+     "fraction": 1,
+     "students": 68,
+     "from": "Rolling Valley",
+     "to": "Saratoga",
+     "walkFrom": 0.0062,
+     "walkTo": 0,
+     "driveFromMin": 6.3,
+     "driveToMin": 6.9,
+     "frl": 0.415
+    }
+   ],
+   "esIslands": 15,
+   "esMoved": 269,
+   "fleet": 1138,
+   "routesES": 843
+  },
+  "optimizer": {
+   "moves": [
+    {
+     "spa": 7919,
+     "from": "Cardinal Forest",
+     "to": "Keene Mill",
+     "students": 70
+    },
+    {
+     "spa": 8816,
+     "from": "Keene Mill",
+     "to": "White Oaks",
+     "students": 108
+    }
+   ],
+   "util": {
+    "Cardinal Forest": 1.009159560134694,
+    "Keene Mill": 0.9009405458339577,
+    "White Oaks": 0.9740395232698525
+   }
+  }
+ }
+}

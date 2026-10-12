@@ -12,9 +12,10 @@ interface Props {
   focus: Focus | null
   onFocus: (f: Focus | null, level?: Level) => void
   onOptimize: (f: Focus) => void
+  onLoadScenario: (moves: [number, string][], f: Focus) => void
 }
 
-export function HotSpots({ model, result, base, focus, onFocus, onOptimize }: Props) {
+export function HotSpots({ model, result, base, focus, onFocus, onOptimize, onLoadScenario }: Props) {
   return (
     <div className="hotspots">
       <p className="hint">FCPS left these areas for extended study after adopting the 2026-27 boundaries. Recommendations are due in January 2027. Focus one to zoom the map, dim everything else, and optimize only among its schools.</p>
@@ -40,6 +41,14 @@ export function HotSpots({ model, result, base, focus, onFocus, onOptimize }: Pr
               </tbody>
             </table>
             {f.spas.length > 0 && <p className="muted">Planning area{f.spas.length > 1 ? 's' : ''} {h.spas!.join(', ')} highlighted.</p>}
+            {h.scenarios && (
+              <div className="btnrow">
+                <span className="muted">Load draft:</span>
+                {h.scenarios.map((sc) => (
+                  <button key={sc.label} title={sc.note} onClick={() => onLoadScenario(sc.moves, f)}>{sc.label}</button>
+                ))}
+              </div>
+            )}
             <div className="btnrow">
               {on ? <button onClick={() => onFocus(null)}>Clear focus</button> : <button onClick={() => onFocus(f, h.levels[0])}>Focus map</button>}
               <button className="primary" onClick={() => onOptimize(f)}>Optimize this area</button>

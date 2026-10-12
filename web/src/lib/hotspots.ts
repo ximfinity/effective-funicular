@@ -13,6 +13,7 @@ export interface HotSpot {
   schools: Partial<Record<Level, string[]>> // schools in scope, by level
   spas?: number[] // specific SPAs called out by FCPS
   source: string
+  scenarios?: { label: string; note?: string; moves: [number, string][] }[] // FCPS draft scenarios: [SPA id, ES name]
 }
 
 export const HOTSPOTS: HotSpot[] = [
@@ -54,8 +55,12 @@ export const HOTSPOTS: HotSpot[] = [
       MS: ['Key', 'Irving', 'Lake Braddock'],
       HS: ['Lewis', 'West Springfield', 'Lake Braddock'],
     },
-    spas: [8922],
-    source: 'https://www.fcps.edu/facilities-planning-future/school-boundary-adjustments',
+    spas: [8922, 8816, 7917, 7919],
+    source: 'https://www.fcps.edu/form/rolling-valley-elementary-school-middle-and-high-school-feeders-and-keene-mill-elementary-0',
+    scenarios: [
+      { label: 'FCPS 5-B', moves: [[8816, 'White Oaks'], [7917, 'Keene Mill'], [7919, 'Keene Mill']] },
+      { label: 'FCPS 5-C (approx.)', note: '5-C also moves parts of SPAs 7917 and 7904, which planning-area editing cannot split; see docs/study5-analysis.md.', moves: [[8816, 'White Oaks'], [7919, 'Keene Mill']] },
+    ],
   },
 ]
 

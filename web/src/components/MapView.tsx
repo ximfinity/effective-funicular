@@ -74,12 +74,18 @@ export function MapView(props: Props) {
     map.current = m
     // if the basemap style cannot load, fall back to a plain background so the model layers still work
     let styled = false
-    m.once('style.load', () => { styled = true })
-    m.on('error', (e) => {
-      if (styled || !String(e.error?.message ?? '').includes('styles')) return
+    const fallback = () => {
+      if (styled) return
       styled = true
       m.setStyle({ version: 8, glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf', sources: {}, layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#eef0ec' } }] })
+    }
+    m.once('style.load', () => { styled = true })
+    m.on('error', (e) => {
+      if (String(e.error?.message ?? '').includes('styles')) fallback()
     })
+    // a basemap host that hangs (no error, no load) must not block the model layers
+    const styleTimer = setTimeout(fallback, 8000)
+    m.once('load', () => clearTimeout(styleTimer))
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
     m.addControl(new maplibregl.ScaleControl({ unit: 'imperial' }), 'bottom-right')
     m.on('load', async () => {

@@ -29,7 +29,7 @@ test changes that relieve overcrowding, cut busing and use capacity better.
 - **"Why is my home here?":** address search and a per-area explanation, with alternatives and their
   utilization impact.
 
-See [`plan.md`](plan.md) for the research, design and validation.
+See [`plan.md`](plan.md) for the research, design and validation, and [`docs/study5-analysis.md`](docs/study5-analysis.md) for a worked example: FCPS's Study 5 draft scenarios (Keene Mill / Cardinal Forest / White Oaks, Oct 2026) run through the model.
 
 ## Run the app
 
