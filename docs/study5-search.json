@@ -1,0 +1,228 @@
+{
+ "baseline": {
+  "util": {
+   "Cardinal Forest": "111% → 113%",
+   "Keene Mill": "95% → 89%",
+   "White Oaks": "85% → 83%",
+   "Rolling Valley": "77% → 73%",
+   "Saratoga": "88% → 83%"
+  },
+  "splitFeeders": [
+   "Keene Mill",
+   "Rolling Valley"
+  ],
+  "islands": 1
+ },
+ "A: ≤100% thru SY30-31, no islands, no split feeders": {
+  "moves": [
+   {
+    "move": "SPA 7822: Cardinal Forest → Rolling Valley",
+    "esStudents": 60,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 3
+   },
+   {
+    "move": "SPA 7919: Cardinal Forest → Keene Mill",
+    "esStudents": 70,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -0.6
+   },
+   {
+    "move": "SPA 8816: Keene Mill → White Oaks",
+    "esStudents": 108,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -1
+   },
+   {
+    "move": "SPA 8821: Keene Mill → Rolling Valley",
+    "esStudents": 97,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 0.6
+   },
+   {
+    "move": "SPA 8922: Rolling Valley → Saratoga",
+    "esStudents": 68,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 0.6
+   }
+  ],
+  "harmed": 404,
+  "walkLost": 0,
+  "islands": 0,
+  "splitFeeders": [],
+  "util": {
+   "Cardinal Forest": "93% → 94%",
+   "Keene Mill": "78% → 75%",
+   "White Oaks": "97% → 94%",
+   "Rolling Valley": "92% → 87%",
+   "Saratoga": "96% → 91%"
+  }
+ },
+ "B: ≤100% thru SY30-31, no islands": {
+  "moves": [
+   {
+    "move": "SPA 7822: Cardinal Forest → Rolling Valley",
+    "esStudents": 60,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 3
+   },
+   {
+    "move": "SPA 7919: Cardinal Forest → Keene Mill",
+    "esStudents": 70,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -0.6
+   },
+   {
+    "move": "SPA 8816: Keene Mill → White Oaks",
+    "esStudents": 108,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -1
+   },
+   {
+    "move": "SPA 8821: Keene Mill → Rolling Valley",
+    "esStudents": 97,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 0.6
+   },
+   {
+    "move": "SPA 8922: Rolling Valley → Saratoga",
+    "esStudents": 68,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 0.6
+   }
+  ],
+  "harmed": 404,
+  "walkLost": 0,
+  "islands": 0,
+  "splitFeeders": [],
+  "util": {
+   "Cardinal Forest": "93% → 94%",
+   "Keene Mill": "78% → 75%",
+   "White Oaks": "97% → 94%",
+   "Rolling Valley": "92% → 87%",
+   "Saratoga": "96% → 91%"
+  }
+ },
+ "C: ≤100% thru SY30-31 only": {
+  "moves": [
+   {
+    "move": "SPA 7822: Cardinal Forest → White Oaks",
+    "esStudents": 60,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 4.2
+   },
+   {
+    "move": "SPA 7911: Cardinal Forest → Rolling Valley",
+    "esStudents": 77,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 2.6
+   }
+  ],
+  "harmed": 137,
+  "walkLost": 0,
+  "islands": 1,
+  "splitFeeders": [
+   "Keene Mill",
+   "White Oaks",
+   "Rolling Valley"
+  ],
+  "util": {
+   "Cardinal Forest": "92% → 93%",
+   "Keene Mill": "95% → 89%",
+   "White Oaks": "92% → 90%",
+   "Rolling Valley": "90% → 86%",
+   "Saratoga": "88% → 83%"
+  }
+ },
+ "D: ≤105% thru SY30-31, no islands, no split feeders": {
+  "moves": [
+   {
+    "move": "SPA 7919: Cardinal Forest → Keene Mill",
+    "esStudents": 70,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -0.6
+   },
+   {
+    "move": "SPA 8816: Keene Mill → White Oaks",
+    "esStudents": 108,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": -1
+   },
+   {
+    "move": "SPA 8821: Keene Mill → Rolling Valley",
+    "esStudents": 97,
+    "secStudents": 0,
+    "loseWalk": 0,
+    "driveChangeMin": 0.6
+   },
+   {
+    "move": "SPA 8922: keep Rolling Valley, move MS/HS to Irving/West Springfield",
+    "esStudents": 0,
+    "secStudents": 51,
+    "loseWalk": 0,
+    "driveChangeMin": 0
+   }
+  ],
+  "harmed": 326,
+  "walkLost": 0,
+  "islands": 0,
+  "splitFeeders": [],
+  "util": {
+   "Cardinal Forest": "101% → 103%",
+   "Keene Mill": "78% → 75%",
+   "White Oaks": "97% → 94%",
+   "Rolling Valley": "94% → 88%",
+   "Saratoga": "88% → 83%"
+  }
+ },
+ "E: ≤100% thru SY30-31, no split feeders (island may remain)": {
+  "moves": [
+   {
+    "move": "SPA 7904: Cardinal Forest → Rolling Valley",
+    "esStudents": 109,
+    "secStudents": 0,
+    "loseWalk": 90,
+    "driveChangeMin": 1.3
+   },
+   {
+    "move": "SPA 8816: keep Keene Mill, move MS/HS to Irving/West Springfield",
+    "esStudents": 0,
+    "secStudents": 83,
+    "loseWalk": 0,
+    "driveChangeMin": 0
+   },
+   {
+    "move": "SPA 8922: keep Rolling Valley, move MS/HS to Irving/West Springfield",
+    "esStudents": 0,
+    "secStudents": 51,
+    "loseWalk": 0,
+    "driveChangeMin": 0
+   }
+  ],
+  "harmed": 243,
+  "walkLost": 90,
+  "islands": 2,
+  "splitFeeders": [],
+  "util": {
+   "Cardinal Forest": "95% → 97%",
+   "Keene Mill": "95% → 89%",
+   "White Oaks": "85% → 83%",
+   "Rolling Valley": "96% → 91%",
+   "Saratoga": "88% → 83%"
+  }
+ }
+}

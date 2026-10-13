@@ -15,7 +15,7 @@ const buf = readFileSync(new URL('walk.bin', D))
 const drive = JSON.parse(readFileSync(new URL('drive.json', D), 'utf8'))
 
 /** Build a model where some SPAs are split into a moving part (fraction f) and a staying part. */
-function buildModel(splits: Record<number, number>, scale: Record<number, number> = {}): { m: Model; part: Map<number, number> } {
+export function buildModel(splits: Record<number, number>, scale: Record<number, number> = {}): { m: Model; part: Map<number, number> } {
   const raw: RawModel = JSON.parse(JSON.stringify(raw0))
   const sp = raw.spa
   const pos = new Map(sp.id.map((id, i) => [id, i]))
@@ -73,7 +73,7 @@ function buildModel(splits: Record<number, number>, scale: Record<number, number
   return { m, part }
 }
 
-const sid = (m: Model, name: string, L = 'ES') => m.schools.findIndex((s) => s.name === name && s.level === L)
+export const sid = (m: Model, name: string, L = 'ES') => m.schools.findIndex((s) => s.name === name && s.level === L)
 const SCHOOLS = ['Cardinal Forest', 'Keene Mill', 'White Oaks', 'Rolling Valley', 'Saratoga']
 
 // 5-C detail is "part of 7904 and part of 7917, plus all of 7919". FCPS gives only the total (85 vs 115 in 5-B).
@@ -87,17 +87,19 @@ const SCENARIOS: Scn[] = [
   { key: 'RV', label: 'Alt (not proposed): 5-C + SPA 8922 Rolling Valley → Saratoga', moves: [[8816, 'White Oaks', 1], [7919, 'Keene Mill', 1], [7917, 'Keene Mill', 0.25], [7904, 'Keene Mill', 0.08], [8922, 'Saratoga', 1]] },
 ]
 
+/** Rescale SPAs 8816, 7917, 7919 so their base-school ES students match FCPS's slide estimates (105; 115 combined). */
+export function fcpsScale(): Record<number, number> {
+  const { m } = buildModel({})
+  const r = compute(m, baselineAssignment(m, '2026'), { ...DEFAULT_PARAMS, year: 0 })
+  const pos = new Map(m.raw.spa.id.map((id, i) => [id, i]))
+  const gen = (id: number) => r.spaStudents.ES[pos.get(id)!] * (1 - DEFAULT_PARAMS.aapEs * 4 / 7)
+  return { 8816: 105 / gen(8816), 7917: 115 / (gen(7917) + gen(7919)), 7919: 115 / (gen(7917) + gen(7919)) }
+}
+
 function run(calib: 'model' | 'fcps') {
   const splits: Record<number, number> = { 7917: 0.25, 7904: 0.08 }
   // FCPS estimates (students attending base school): 8816 = 105; 7917+7919 = 115. Rescale those SPAs to match.
-  let scale: Record<number, number> = {}
-  if (calib === 'fcps') {
-    const { m } = buildModel({})
-    const r = compute(m, baselineAssignment(m, '2026'), { ...DEFAULT_PARAMS, year: 0 })
-    const pos = new Map(m.raw.spa.id.map((id, i) => [id, i]))
-    const gen = (id: number) => r.spaStudents.ES[pos.get(id)!] * (1 - DEFAULT_PARAMS.aapEs * 4 / 7)
-    scale = { 8816: 105 / gen(8816), 7917: 115 / (gen(7917) + gen(7919)), 7919: 115 / (gen(7917) + gen(7919)) }
-  }
+  const scale = calib === 'fcps' ? fcpsScale() : {}
   const { m, part } = buildModel(splits, scale)
   const base = baselineAssignment(m, '2026')
   const out: Record<string, unknown> = { calib, scale }
@@ -166,20 +168,22 @@ function run(calib: 'model' | 'fcps') {
   return out
 }
 
-const results = { model: run('model'), fcps: run('fcps') }
-mkdirSync(new URL('../../docs/', import.meta.url), { recursive: true })
-writeFileSync(new URL('../../docs/study5-results.json', import.meta.url), JSON.stringify(results, null, 1))
-const p = (x: number) => `${Math.round(100 * x)}%`
-for (const [calib, r] of Object.entries(results) as [string, Record<string, any>][]) {
-  console.log(`\n=== ${calib === 'model' ? 'Model estimates' : 'Recalibrated to FCPS moved-student estimates'} ===`)
-  for (const k of ['5A', '5B', '5C', 'RV']) {
-    const s = r[k]
-    console.log(`\n${s.label}  | ES islands ${s.esIslands} · moved ${s.esMoved} · fleet ${s.fleet} · ES routes ${s.routesES}`)
-    for (const [n, v] of Object.entries(s.schools) as [string, any][]) {
-      console.log(`  ${n.padEnd(16)} SY25-26 ${String(v.enroll25).padStart(4)} ${p(v.util25).padStart(5)} | SY26-27 ${p(v.util27).padStart(5)} | SY30-31 ${p(v.util31).padStart(5)} | walk ${p(v.walkShare)} riders ${v.riders} hazard ${v.hazard} | routes ${v.routes} avg ${v.avgRide.toFixed(1)}m max ${v.maxRide.toFixed(0)}m | FRL ${p(v.frl)} | pieces ${v.pieces}`)
+if (process.argv[1]?.endsWith('study5.ts')) {
+  const results = { model: run('model'), fcps: run('fcps') }
+  mkdirSync(new URL('../../docs/', import.meta.url), { recursive: true })
+  writeFileSync(new URL('../../docs/study5-results.json', import.meta.url), JSON.stringify(results, null, 1))
+  const p = (x: number) => `${Math.round(100 * x)}%`
+  for (const [calib, r] of Object.entries(results) as [string, Record<string, any>][]) {
+    console.log(`\n=== ${calib === 'model' ? 'Model estimates' : 'Recalibrated to FCPS moved-student estimates'} ===`)
+    for (const k of ['5A', '5B', '5C', 'RV']) {
+      const s = r[k]
+      console.log(`\n${s.label}  | ES islands ${s.esIslands} · moved ${s.esMoved} · fleet ${s.fleet} · ES routes ${s.routesES}`)
+      for (const [n, v] of Object.entries(s.schools) as [string, any][]) {
+        console.log(`  ${n.padEnd(16)} SY25-26 ${String(v.enroll25).padStart(4)} ${p(v.util25).padStart(5)} | SY26-27 ${p(v.util27).padStart(5)} | SY30-31 ${p(v.util31).padStart(5)} | walk ${p(v.walkShare)} riders ${v.riders} hazard ${v.hazard} | routes ${v.routes} avg ${v.avgRide.toFixed(1)}m max ${v.maxRide.toFixed(0)}m | FRL ${p(v.frl)} | pieces ${v.pieces}`)
+      }
+      console.log('  KM feeds', JSON.stringify(s.feederKM), '| RV feeds', JSON.stringify(s.feederRV))
+      for (const mv of s.moved) console.log(`  move ${mv.spa}${mv.fraction < 1 ? ` (${p(mv.fraction)})` : ''}: ${mv.students} ES ${mv.from}→${mv.to}; walk ${p(mv.walkFrom)}→${p(mv.walkTo)}; drive ${mv.driveFromMin.toFixed(1)}→${mv.driveToMin.toFixed(1)} min; FRL ${p(mv.frl)}`)
     }
-    console.log('  KM feeds', JSON.stringify(s.feederKM), '| RV feeds', JSON.stringify(s.feederRV))
-    for (const mv of s.moved) console.log(`  move ${mv.spa}${mv.fraction < 1 ? ` (${p(mv.fraction)})` : ''}: ${mv.students} ES ${mv.from}→${mv.to}; walk ${p(mv.walkFrom)}→${p(mv.walkTo)}; drive ${mv.driveFromMin.toFixed(1)}→${mv.driveToMin.toFixed(1)} min; FRL ${p(mv.frl)}`)
+    console.log('\noptimizer (balanced, feeders x1.5, CF/KM/WO only):', JSON.stringify(r.optimizer))
   }
-  console.log('\noptimizer (balanced, feeders x1.5, CF/KM/WO only):', JSON.stringify(r.optimizer))
 }

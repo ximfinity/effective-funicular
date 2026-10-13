@@ -76,6 +76,34 @@ The model reproduces FCPS's own numbers, so the extra measures below sit on a co
 - **Untested alternative** (not an FCPS scenario): moving 8922 (~68 elementary students, est. FRL ~42%) to Saratoga, which already feeds Key/Lewis, ends that split. It would leave Rolling Valley at ~66% (underused) and push Saratoga to ~96%, with no walk or drive benefit. On capacity alone, 5-A is defensible.
 - **Data note.** FCPS's 5-A table shows Rolling Valley 534 (97%) and Saratoga 617 (76%). The county's 2026-27 planning-area layer already assigns SPAs 8921 and 8923 (formerly Rolling Valley) to Saratoga, so the model shows Rolling Valley ~80% and Saratoga ~88% under 5-A. It's worth asking FCPS which set of numbers reflects the adopted 2026-27 boundaries.
 
+## What would work best? Exhaustive search (Oct 13, 2026)
+
+`web/scripts/study5-search.ts` tries every combination of up to 6 whole-planning-area moves among Cardinal Forest, Keene Mill, White Oaks, Rolling Valley and Saratoga. That is 30 options from 15 boundary planning areas, plus "fix the feeder in place" moves, about 334k combinations, all recalibrated to FCPS counts. For each set of goals it keeps the combination that affects the fewest students. Results are written to `docs/study5-search.json`.
+
+| Goal set (through SY30-31) | Fewest students moved | Moves | Result |
+|---|---|---|---|
+| Capacity only (all ≤100%) | 137 ES | 7822 CF→WO, 7911 CF→RV | Keeps the island and Keene Mill's split feeder, and *creates* a White Oaks split feeder. Not recommended. |
+| ≤100%, no split feeders (island may stay) | 109 ES + 134 MS/HS | 7904 CF→RV; 8816 and 8922 keep their ES but switch MS/HS to Irving/West Springfield | 90 students lose a walkable route. Not recommended. |
+| ≤105%, no islands, no split feeders | 275 ES + 51 MS/HS | 7919→KM, 8816→WO, 8821→RV, 8922 MS/HS → Irving/WSHS | Cardinal Forest stays at 101–103% |
+| All goals: ≤100%, no islands, no split feeders | 403 ES | 7822→RV, 7919→KM, 8816→WO, 8821→RV, 8922→Saratoga | Everything is clean, but Keene Mill falls to 75–78% |
+
+**Recommended balance: FCPS's 5-C core plus one more whole planning area**
+
+| Plan | ES moved | Lose walk | CF / KM / WO / RV (SY26-27 → SY30-31) | Island | Split feeders |
+|---|---|---|---|---|---|
+| FCPS 5-C (with partial SPAs) | ~193 | ~23 | 98→100 / 93→89 / 97→94 / 77→73 | remains (8821) | RV |
+| 5-C core only (8816→WO, 7919→KM) | 178 | 0 | 101→103 / 90→86 / 97→94 / 77→73 | remains | RV |
+| **5-C core + 7822 CF→RV** | **238** | **0** | **93→94 / 90→86 / 97→94 / 87→83** | remains | RV |
+| …+ 8922 MS/HS → Irving/WSHS | 238 + 51 MS/HS | 0 | same | remains | **none** |
+
+Why this beats 5-C over the long term:
+- Cardinal Forest stays at about 94% through SY30-31 instead of drifting back to about 100%.
+- It uses Rolling Valley's empty seats (73% by SY30-31 otherwise) instead of loading White Oaks alone.
+- No planning area has to be split.
+- No student loses a walkable route. 7822's students already ride the bus.
+
+**Cost:** about 60 students in 7822 ride about 3 minutes longer (3.5 → 6.5 min). Moving 7911 → Rolling Valley instead (77 students, 2.9 → 5.5 min) is a near-equal alternative.
+
 ## Questions worth raising with FCPS
 
 1. Which homes in 7917 and 7904 move under 5-C? How many of them are within Cardinal Forest's walk zone today?
